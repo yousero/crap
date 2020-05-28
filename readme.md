@@ -1,6 +1,6 @@
 # Scrape
 
-Just Text Objects
+packs of code examples
 
 ## highlights
 
