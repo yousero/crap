@@ -16,18 +16,32 @@ args = parser.parse_args()
 regex = re.compile(args.regex, re.IGNORECASE)
 
 files_by_regex = []
-failed_files = []
+dirs_by_regex = []
+
+failed_paths = []
 
 for root, dirs, files in os.walk(args.path):
-  pool = files
+  pool = [(name, False) for name in files]
 
   if args.include_dirs:
-    pool = dirs + pool
+    pool += [(name, True) for name in dirs]
 
-  for name in pool:
-    if regex.search(name):
-      replace = regex.sub(args.replacer, name)
-      files_by_regex.append([root, name, replace])
+  for name, is_dir in pool:
+    match = regex.search(name)
+
+    if match:
+      replacer = re.sub(
+        r'\$(\d+)',
+        lambda m: match.group(int(m.group(1))),
+        args.replacer)
+
+      replace = regex.sub(replacer, name)
+
+      if is_dir:
+        dirs_by_regex.append([root, name, replace])
+      else:
+        files_by_regex.append([root, name, replace])
+
       print(f'"{name}" -> "{replace}"')
 
 answer = input('\nDo you want to accept this? [y|N] ')
@@ -37,11 +51,18 @@ if answer and answer.lower()[0] == 'y':
     try:
       os.rename(os.path.join(root, file), os.path.join(root, replace))
     except Exception as e:
-      failed_files.append([root, file])
+      failed_paths.append([root, file])
 
-  print(f'\n{len(files_by_regex) - len(failed_files)} files was renamed')
+  for root, name, replace in dirs_by_regex:
+    try:
+      os.rename(os.path.join(root, name), os.path.join(root, replace))
+    except Exception as e:
+      failed_paths.append([root, name])
 
-  if failed_files:
-    print('\nfailed files:')
-  for root, file in failed_files:
+  count = len(files_by_regex) + len(dirs_by_regex) - len(failed_paths)
+  print(f'\n{count} files was renamed')
+
+  if failed_paths:
+    print('\nfailed paths:')
+  for root, file in failed_paths:
     print(os.path.join(root, file))
