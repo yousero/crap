@@ -1,0 +1,82 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dialog</title>
+
+  <link rel="stylesheet" type="text/css" href="css.css">
+</head>
+<body>
+  <div class="container">
+    <div class="history" id="history">
+      <div class="message">
+        <div class="nickname">
+          <b>Person 1</b>
+        </div>
+        <div class="text">
+          hello friend
+        </div>
+      </div>
+      <div class="message">
+        <div class="nickname">
+          <b>Person 2</b>
+        </div>
+        <div class="text">
+          hi
+        </div>
+      </div>
+    </div>
+    <form method="post" id="messageForm">
+      <textarea class="messageInput" name="message"></textarea>
+      <button class="sendButton">send</button>
+    </form>
+  </div>
+
+  <template id="messageTemplate">
+    <div class="message">
+      <div class="nickname"></div>
+      <div class="text"></div>
+    </div>
+  </template>
+
+  <script>
+    const nickname = 'Person 2'
+
+    const messageForm = document.body.querySelector('#messageForm')
+    const messageTemplate = document.body.querySelector('#messageTemplate')
+    const history = document.body.querySelector('#history')
+
+    function printMessage(message) {
+      const messageElement = messageTemplate.content.cloneNode(true);
+
+      messageElement.querySelector('.nickname').innerHTML = `<b>${message['nickname']}</b>`
+      messageElement.querySelector('.text').textContent = message['message']
+      
+      history.appendChild(messageElement)
+    }
+
+    function postMessage(e) {
+      e.preventDefault()
+      
+      const message = {
+        "nickname": nickname
+      }
+
+      for (const elem of e.target.elements) {
+        if (elem.name) {
+          message[elem.name] = elem.value
+        }
+      }
+
+      printMessage(message)
+
+      e.target.reset()
+    }
+
+    messageForm.addEventListener('submit', postMessage)
+  </script>
+
+</body>
+</html>
