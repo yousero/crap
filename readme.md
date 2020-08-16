@@ -4,6 +4,4 @@ packs of code examples
 
 ## highlights
 
- * not yet
-
-
+ * [Checkalo Bot](/python/telegram/bots/checkalo_bot.py) — telegram to-do list bot
