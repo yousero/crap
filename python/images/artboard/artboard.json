@@ -1,0 +1,22 @@
+{
+  "type": "artboard",
+  "width": 720,
+  "height": 404,
+  "layers": [
+    {
+      "type": "layer",
+      "file": "im1.jpg",
+      "xy": [0,0]
+    },
+    { 
+      "type": "layer",
+      "file": "im2.png",
+      "xy": [20,20]
+    },
+    {
+      "type": "layer",
+      "file": "im3.bmp",
+      "xy": [620,304]
+    }
+  ]
+}
