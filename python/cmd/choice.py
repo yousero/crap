@@ -1,6 +1,6 @@
 
 """
-Shuffle text lines and output them
+Output random line from input text
 """
 
 import random
@@ -15,10 +15,7 @@ while x:
   except EOFError:
     break
   if line.strip():
-    array.append(line)  
+    array.append(line)
     x = True
 
-random.shuffle(array)
-
-for string in array:
-  print(string)
+print(random.choice(array))
