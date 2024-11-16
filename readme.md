@@ -1,5 +1,5 @@
 ## scrape industries
-experimental code packages
+experimental scripts
 
 ### Python
 * [Artboard](/python/images/artboard)
