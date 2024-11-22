@@ -1,3 +1,8 @@
+
+"""
+Output random line from input text
+"""
+
 import random
 
 array = []

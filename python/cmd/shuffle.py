@@ -1,14 +1,22 @@
 
 """
-Shuffle readlines and print them. 
-Needs number of strings in first line.
+Shuffle text lines and output them
 """
 
 import random
 
+array = []
+x = True
 
-n = int(input())
-array = [input() for i in range(n)]
+while x:
+  x = False
+  try:
+    line = input()
+  except EOFError:
+    break
+  if line.strip():
+    array.append(line)  
+    x = True
 
 random.shuffle(array)
 
