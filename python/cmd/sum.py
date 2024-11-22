@@ -9,7 +9,7 @@ while True:
   if not line.strip():
     break
   try:
-    s += int(line)
+    s += float(line)
   except ValueError:
     break
 
