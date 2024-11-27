@@ -1,4 +1,8 @@
 
+"""
+  Sums floats from input.
+"""
+
 s = 0
 
 while True:

@@ -1,4 +1,8 @@
 
+"""
+  Sorts text lines from input.
+"""
+
 array = []
 
 while True:

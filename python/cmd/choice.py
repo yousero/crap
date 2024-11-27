@@ -1,6 +1,6 @@
 
 """
-Output random line from input text
+  Output random line from input text.
 """
 
 import random

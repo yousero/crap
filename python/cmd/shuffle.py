@@ -1,6 +1,6 @@
 
 """
-Shuffle text lines and output them
+  Shuffle text lines and output them.
 """
 
 import random
