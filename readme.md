@@ -1,4 +1,4 @@
-## crap industries
+## crap
 experimental scripts
 
 ### Python
