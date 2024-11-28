@@ -3,11 +3,13 @@
   Limit array elements by number of occurrences.
 """
 
+from include import include
+
 def limit(arr, n):
   counts = {}
   result = []
   for value in arr:
-    if value in counts:
+    if include(counts, item):
       counts[value] += 1
     else:
       counts[value] = 1

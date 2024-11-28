@@ -8,7 +8,7 @@ def move_to_end(arr, item):
   count = 0
 
   for x in arr:
-    if x == item:
+    if x == item and type(x) == type(item):
       count += 1
     else:
       result.append(x)

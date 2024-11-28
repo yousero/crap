@@ -3,11 +3,7 @@
   Removes duplicates.
 """
 
-def include(arr, item):
-  for x in arr:
-    if x == item and type(item) == type(x):
-      return True
-  return False
+from include import include
 
 def unique(arr):
   result = []
