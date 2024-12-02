@@ -4,7 +4,7 @@
 """
 
 def compact(array):
-  falseys = ['', None, False, 0, {}, []]
+  falseys = ['', None, False, 0, {}, [], (,)]
   return [x for x in array if x not in falseys]
 
 if __name__ == '__main__':
