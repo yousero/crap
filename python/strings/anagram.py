@@ -1,8 +1,14 @@
+
+"""
+  Determines if a string is an anagram.
+"""
+
+import re
 from collections import Counter
 
 def anagram(str1, str2):
-  str1 = str1.replace(' ', '').lower()
-  str2 = str2.replace(' ', '').lower()
+  str1 = re.sub(r'\s+', '', str1).lower()
+  str2 = re.sub(r'\s+', '', str2).lower()
   return Counter(str1) == Counter(str2)
 
 if __name__ == '__main__':
