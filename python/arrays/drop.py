@@ -5,8 +5,7 @@
 
 def drop(array, f=None):
   result = []
-  if f is None:
-    f = 1
+  if f is None: f = 1
 
   if type(f) == int:
     result = list(array)[f:]
