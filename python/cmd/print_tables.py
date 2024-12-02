@@ -1,7 +1,8 @@
 import os
 
-
-def print_tables(tables, width=os.get_terminal_size().columns, spaces=3, index_width=3):
+def print_tables(tables, width=None, spaces=3, index_width=3):
+  if width is None:
+    width = os.get_terminal_size().columns
   space = ' ' * spaces
   lines = []
 
