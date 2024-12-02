@@ -16,3 +16,4 @@ def intersection(*arrays):
   
 if __name__ == '__main__':
   print(intersection([2, 1], [2, 3]))
+  print(intersection([2, '1'], ['2', 3]))
