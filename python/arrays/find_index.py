@@ -7,7 +7,7 @@ def find_index(array, f=None, from_index=0):
   index = None
   if f is None: f = lambda x: x
 
-  for i, x in enumerate(array):
+  for i, x in enumerate(array[from_index:]):
     if f(x): return i
 
   if index is None:
