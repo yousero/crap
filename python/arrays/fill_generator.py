@@ -3,6 +3,7 @@
   Generate elements of `array` with `value` from 
   `start` up to, but not including, `end`.
 """
+
 def fill_generator(array, value, start=0, end=None):
   result = []
   if end is None: end = len(array)
