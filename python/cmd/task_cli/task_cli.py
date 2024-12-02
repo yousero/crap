@@ -27,6 +27,11 @@ def json_obj():
 def save_obj(j):
   json.dump(j, open(file_path, 'w', encoding='utf-8'))
 
+def find_task(j, _id):
+  for x in j:
+    if x['id'] == _id:
+      return x
+
 def add(task_name):
   j = json_obj() 
 
@@ -48,30 +53,32 @@ def add(task_name):
 def update(_id, task_name):
   j = json_obj() 
 
-  task = j[_id]
+  task = find_task(j, _id)
   task |= {
     'description': task_name,
     'status': 'todo',
     'updatedAt': datetime.datetime.now().isoformat()
   } 
-
-  j[_id] = task
   
   save_obj(j)
 
 def delete(_id):
-  j = json_obj() 
-  del j[_id]
+  j = json_obj()
+  for i, x in enumerate(j):
+    if x['id'] == _id:
+      del j[i]
   save_obj(j)
 
 def mark_in_progress(_id):
-  j = json_obj() 
-  j[_id]['status'] = 'in-progress'
+  j = json_obj()
+  task = find_task(j, _id)
+  task['status'] = 'in-progress'
   save_obj(j)
 
 def mark_done(_id):
   j = json_obj() 
-  j[_id]['status'] = 'done'
+  task = find_task(j, _id)
+  task['status'] = 'done'
   save_obj(j)
 
 def _list(mark=''):
