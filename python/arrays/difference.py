@@ -9,14 +9,16 @@ from include import include
 
 def difference(array, values, f=None, *args):
   s = set()
-  f = lambda x: not include.include(s, x)
+  f = lambda x: not include(s, x)
   values.extend(args)
   for x in values:
     if not isinstance(x, str) and isinstance(x, Iterable):
       s.update(x)
     else:
       s.add(x)
-  return list(filter(f, array))
+  T = type(array)
+  return T(filter(f, array))
 
 if __name__ == '__main__':
   print(difference([2, 1], [2, 3]))
+  print(difference((2, 1), [2, 3]))
