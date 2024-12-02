@@ -4,10 +4,10 @@
   of running each element of `collection` thru `f`.
 """
 
-def group_by(array, f=None):
+def group_by(collection, f=None):
   if f is None: f = lambda x: x
   obj = {}
-  for x in set(array):
+  for x in set(collection):
     key = str(f(x))
     if key in obj:
       obj[key].append(x)
