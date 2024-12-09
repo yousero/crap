@@ -17,10 +17,10 @@ def index():
 @app.route('/hi')
 @app.route('/hello')
 def say_hello():
-  return '<h1>Hello, Flask!</h1>'
+  return '<h2>Hello, Flask!</h2>'
 
 
-@app.route('/greet', defaults={'name': 'Programmer'})
+@app.route('/greet', defaults={'name': 'user'})
 @app.route('/greet/<name>')
 def greet(name):
   return '<h1>Hello, %s!</h1>' % name
