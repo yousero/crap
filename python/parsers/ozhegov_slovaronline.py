@@ -13,7 +13,10 @@ try:
 except FileNotFoundError:
   pass
 
-base_url = "https://ozhegov.slovaronline.com"
+base_url = 'https://ozhegov.slovaronline.com'
+headers = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+
 
 def upload_words():
   for k,v in enumerate(tqdm([x for x in words if len(x) == 2])):
@@ -28,9 +31,6 @@ def upload_words():
 
 def upload():
   urls = [f'{base_url}/articles/{c}/page-1' for c in abc_ru]
-
-  headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
   
   for url in urls:
     response = requests.get(url, headers=headers)
