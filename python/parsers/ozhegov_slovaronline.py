@@ -15,6 +15,17 @@ except FileNotFoundError:
 
 base_url = "https://ozhegov.slovaronline.com"
 
+def upload_words():
+  for k,v in enumerate(tqdm([x for x in words if len(x) == 2])):
+    response = requests.get(f'{base_url}{v[1]}', headers=headers)
+    if response.status_code == 200:
+      soup = BeautifulSoup(response.text, 'html.parser')
+      div = soup.find(class_='blockquote')
+      words[k] += (div.get_text(),)
+    else:
+      break
+
+
 def upload():
   urls = [f'{base_url}/articles/{c}/page-1' for c in abc_ru]
 
@@ -26,19 +37,17 @@ def upload():
     soup = BeautifulSoup(response.text, 'html.parser')
     div = soup.find(class_='articles-link-list')
     words.extend([(x.get_text(), x['href']) for x in div.find_all('a', href=True)])
-  
-  for k,v in enumerate(tqdm(words)):
-    response = requests.get(f'{base_url}{v[1]}', headers=headers)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    div = soup.find(class_='blockquote')
-    words[k] += (div.get_text(),)
+
+  upload_words()
 
 
 def get_random_word():
   if not len(words):
     upload()
-    with open('words.json', 'w', encoding='utf-8') as f:
-      json.dump(words, f)
+  elif not all([len(x) == 3 for x in words]):
+    upload_words()
+  with open('words.json', 'w', encoding='utf-8') as f:
+    json.dump(words, f)
   return random.choice(words)
 
 
