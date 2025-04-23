@@ -3,7 +3,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='tree')
 parser.add_argument('path', nargs='?', type=str, default='.',
-                    help='path to directory for scaning', )
+                    help='path to directory for walk', )
 args = parser.parse_args()
 
 prefix = ''
