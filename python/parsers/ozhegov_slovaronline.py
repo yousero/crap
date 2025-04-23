@@ -18,7 +18,7 @@ headers = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
 
-def upload_words():
+def download_words():
   for k,v in enumerate(tqdm([x for x in words if len(x) == 2])):
     response = requests.get(f'{base_url}{v[1]}', headers=headers)
     if response.status_code == 200:
@@ -29,7 +29,7 @@ def upload_words():
       break
 
 
-def upload():
+def download():
   urls = [f'{base_url}/articles/{c}/page-1' for c in abc_ru]
   
   for url in urls:
@@ -38,14 +38,14 @@ def upload():
     div = soup.find(class_='articles-link-list')
     words.extend([(x.get_text(), x['href']) for x in div.find_all('a', href=True)])
 
-  upload_words()
+  download_words()
 
 
 def get_random_word():
   if not len(words):
-    upload()
+    download()
   elif not all([len(x) == 3 for x in words]):
-    upload_words()
+    download_words()
   with open('words.json', 'w', encoding='utf-8') as f:
     json.dump(words, f)
   return random.choice(words)
